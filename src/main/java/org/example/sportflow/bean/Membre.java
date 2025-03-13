@@ -7,16 +7,21 @@ public class Membre {
     private int id;
     private String nom;
     private String sportpratique ;
-    private Date datenaissance;
+    private String datenaissance;
     private String role ;
+    private String username;
+    private String password;
 
-    public Membre( String nom, String sportpratique, Date datenaissance , String role ) {
+    public Membre( String nom,  String datenaissance ,String sportpratique, String role , String username, String password ) {
 
         this.nom = nom;
         this.sportpratique = sportpratique;
         this.datenaissance = datenaissance;
         this.role = role;
+        this.username = username;
+        this.password = password;
     }
+    public Membre() {}
 
     public int getId() {
         return id;
@@ -42,11 +47,11 @@ public class Membre {
         this.sportpratique = sportpratique;
     }
 
-    public Date getDatenaissance() {
+    public String getDatenaissance() {
         return datenaissance;
     }
 
-    public void setDatenaissance(Date datenaissance) {
+    public void setDatenaissance(String datenaissance) {
         this.datenaissance = datenaissance;
 
     }
@@ -55,5 +60,18 @@ public class Membre {
     }
     public void setRole(String role) {
         this.role = role;
+    }
+    public String getUsername() {
+
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
