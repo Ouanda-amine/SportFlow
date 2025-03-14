@@ -143,14 +143,18 @@ public class MembreDAO {
                     membre.setUsername(res.getString("username"));
                     membre.setPassword(res.getString("password"));
 
+                    System.out.println("membre trouvé");
+
                 }
 
             }
 
         }catch (Exception e) {
             e.printStackTrace();
+            System.out.println("membre not found");
         }
         return membre;
+
     }
 
 

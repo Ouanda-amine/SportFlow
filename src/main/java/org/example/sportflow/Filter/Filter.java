@@ -25,19 +25,16 @@ public class Filter implements jakarta.servlet.Filter {
         String uri = httpRequest.getRequestURI();
         HttpSession session = httpRequest.getSession(false);
 
-        // Redirection vers la page de connexion si la racine du site est accédée
         if (uri.equals(httpRequest.getContextPath() + "/") || uri.equals(httpRequest.getContextPath())) {
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
             return;
         }
 
-        // Autoriser l'accès à la page de connexion et aux ressources publiques (CSS, JS)
         if (uri.endsWith("login") || uri.contains("/css/") || uri.contains("/js/")) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
 
-        // Vérification si l'utilisateur est connecté en tant qu'admin
         if (uri.startsWith(httpRequest.getContextPath() + "/admin")) {
             if (session == null || session.getAttribute("admin") == null) {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/login"); // Redirection vers la page login
@@ -45,9 +42,8 @@ public class Filter implements jakarta.servlet.Filter {
             }
         }
 
-        // Vérification si l'utilisateur est connecté en tant que membre
         if (uri.startsWith(httpRequest.getContextPath() + "/membre")) {
-            if (session == null || session.getAttribute("user") == null) {
+            if (session == null || session.getAttribute("membre") == null) {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/login"); // Redirection vers la page login
                 return;
             }
@@ -61,15 +57,13 @@ public class Filter implements jakarta.servlet.Filter {
         }
 
 
-        // Gestion générale (par exemple, page d'accueil)
         if (uri.endsWith("home")) {
-            if (session == null || (session.getAttribute("admin") == null && session.getAttribute("user") == null)) {
+            if (session == null || (session.getAttribute("admin") == null && session.getAttribute("membre") == null)) {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/login"); // Redirection vers la page login
                 return;
             }
         }
 
-        // Continuer la chaîne de filtres pour toutes les autres requêtes
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

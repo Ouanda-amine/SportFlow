@@ -46,9 +46,9 @@ public class LoginServlet  extends HttpServlet {
         Membre membre = membreDAO.getmembreInfos(username, password);
         if (membre != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", membre);
+            session.setAttribute("membre", membre);
 
-            response.sendRedirect(request.getContextPath() + "/MembreHome.jsp");
+            response.sendRedirect(request.getContextPath() + "/membrePage");
             return;
         }
         Entraineur entraineur = entraineurDAO.getTrainerInfos(username, password);
@@ -56,7 +56,7 @@ public class LoginServlet  extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("entr", entraineur);
 
-            response.sendRedirect(request.getContextPath() + "/EntraineurHome.jsp");
+            response.sendRedirect(request.getContextPath() + "/trainerPage");
             return;
         }
 
