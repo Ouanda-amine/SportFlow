@@ -16,7 +16,7 @@
 <div class="container w-50 mt-5" style="background-color: rgba(0,0,255,0.38) ; padding: 40px ; border-radius: 15px;" >
     <div class="card-body">
         <h2 class="card-title text-center mb-4">Connect to your Account</h2>
-        <form action="#" method="post">
+        <form action="login" method="post">
             <label for="username" class="form-label">User Name</label>
             <input type="text" class="form-control" id="username" name="username">
             <label for="password" class="form-label">PassWord</label>

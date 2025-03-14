@@ -1,6 +1,7 @@
 package org.example.sportflow.DAO;
 
 import org.example.sportflow.bean.Entraineur;
+import org.example.sportflow.bean.Membre;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -116,6 +117,35 @@ public class EntraineurDAO {
             System.out.println("trainer not founddd");
         }
     }
+
+    public Entraineur getTrainerInfos(String username  , String password) {
+        Entraineur entraineur = null;
+        System.out.println("aaaaaaaaaa");
+        String sql = "select * from entraineur where username=? and password=?";
+        try (PreparedStatement pes = conn.prepareStatement(sql)){
+            pes.setString(1, username);
+            pes.setString(2, password);
+
+            try (ResultSet res = pes.executeQuery()){
+                if (res.next()) {
+                    entraineur = new Entraineur();
+                    entraineur.setIdent(res.getInt("id_ent"));
+                    entraineur.setName(res.getString("name"));
+                    entraineur.setSpecialite(res.getString("specialite"));
+                    entraineur.setRoole(res.getString("role"));
+                    entraineur.setUsrname(res.getString("username"));
+                    entraineur.setPsw(res.getString("password"));
+
+                }
+
+            }
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return entraineur;
+    }
+
 
 
 

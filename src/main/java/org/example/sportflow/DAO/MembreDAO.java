@@ -124,6 +124,35 @@ public class MembreDAO {
         }
     }
 
+    public Membre getmembreInfos(String username  , String password) {
+        Membre membre = null;
+        System.out.println("aaaaaaaaaa");
+        String sql = "select * from membre where username=? and password=?";
+        try (PreparedStatement pes = conn.prepareStatement(sql)){
+            pes.setString(1, username);
+            pes.setString(2, password);
+
+            try (ResultSet res = pes.executeQuery()){
+                if (res.next()) {
+                    membre = new Membre();
+                    membre.setId(res.getInt("id_membre"));
+                    membre.setNom(res.getString("nom"));
+                    membre.setDatenaissance(res.getString("ladate"));
+                    membre.setSportpratique(res.getString("sport_pra"));
+                    membre.setRole(res.getString("role"));
+                    membre.setUsername(res.getString("username"));
+                    membre.setPassword(res.getString("password"));
+
+                }
+
+            }
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return membre;
+    }
+
 
 
 }
